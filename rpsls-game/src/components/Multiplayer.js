@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Rock, Paper, Scissors, Lizard, Spock } from './Choice'
+import { Rock, Paper, Scissors, Lizard, Spock } from './Choice';
+import { load, waiting } from '../utils/Utils';
+import '../styles/Player.css';
 
 const Multiplayer = () => {
     const [result, setResult] = useState("");
@@ -23,10 +25,6 @@ const Multiplayer = () => {
         }
     }
 
-    function load(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
     useEffect(() => {
         if (playerOneChoice !== "" && playerTwoChoice !== "") {
             play(playerOneChoice, playerTwoChoice);
@@ -44,21 +42,41 @@ const Multiplayer = () => {
 
     return (
         <div>
-            <div>Player 1 Points: {playerOnePoints}</div>
-            <div>Player 2 Points: {playerTwoPoints}</div>
+            <p>Player 1 Points: {playerOnePoints}</p>
+            <p>Player 2 Points: {playerTwoPoints}</p>
             <div>
                 {[new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()]
                     .map(choice =>
-                        <button key={choice.name} onClick={() => setPlayerOneChoice(choice)} disabled={playerOneChoice !== ""}>{choice.name}</button>)}
+                        <button
+                            key={choice.name}
+                            className={"choice-img choice-img--" + choice.name}
+                            onClick={() => setPlayerOneChoice(choice)}
+                            disabled={playerOneChoice !== ""}>
+                        </button>)}
             </div>
-            <p>Player One Choice: {playerOneChoice ? "WAITING FOR PLAYER TWO" : "DIDN'T CHOSE"}</p>
+            {result === "" ?
+                <div className='messageText'>Player One: {
+                    playerOneChoice ? waiting("WAITING FOR PLAYER TWO") : waiting("DIDN'T CHOSE YET")}</div>
+                :
+                <div className='messageText'>Player One Choice: {playerOneChoice.name}</div>
+            }
             <div>
                 {[new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()]
                     .map(choice =>
-                        <button key={choice.name} onClick={() => setPlayerTwoChoice(choice)} disabled={playerTwoChoice !== ""}>{choice.name}</button>)}
+                        <button
+                            key={choice.name}
+                            className={"choice-img choice-img--" + choice.name}
+                            onClick={() => setPlayerTwoChoice(choice)}
+                            disabled={playerTwoChoice !== ""}>
+                        </button>)}
             </div>
-            <p>Player Two Choice: {playerTwoChoice ? "WAITING FOR PLAYER ONE" : "DIDN'T CHOSE"}</p>
-            {result ? <p>Actual Result: {result}</p> : null}
+            {result === "" ?
+                <div className='messageText'>Player Two: {
+                    playerTwoChoice ? waiting("WAITING FOR PLAYER ONE") : waiting("DIDN'T CHOSE YET")}</div>
+                :
+                <div className='messageText'>Player Two Choice: {playerTwoChoice.name}</div>
+            }
+            {result ? <p className='lineUp'>Result: {result}</p> : null}
             <Link to={'/'}>
                 <button className="button">Go to home</button>
             </Link>

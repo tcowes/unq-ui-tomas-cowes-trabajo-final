@@ -1,6 +1,8 @@
 import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Rock, Paper, Scissors, Lizard, Spock } from './Choice'
+import { Rock, Paper, Scissors, Lizard, Spock } from './Choice';
+import { load, waiting } from '../utils/Utils';
+import '../styles/Player.css';
 
 const OnePlayer = () => {
     const [result, setResult] = useState("");
@@ -9,10 +11,6 @@ const OnePlayer = () => {
     const [playerPoints, setPlayerPoints] = useState(0);
     const [computerChoice, setComputerChoice] = useState("");
     const [computerPoints, setComputerPoints] = useState(0);
-
-    function load(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
     function randomChoice() {
         const possibleChoices = [new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()];
@@ -38,7 +36,7 @@ const OnePlayer = () => {
         setPlayerChoice(newPlayerChoice);
         await load(1500);
         evaluateRound(newPlayerChoice, randomChoice());
-        await load(1500);
+        await load(2000);
         setComputerChoice("");
         setPlayerChoice("");
         setResult("");
@@ -46,18 +44,32 @@ const OnePlayer = () => {
 
     return (
         <div>
-            <div>Player Points: {playerPoints}</div>
-            <div>Computer Points: {computerPoints}</div>
+            <p>Player Points: {playerPoints}</p>
+            <p>Computer Points: {computerPoints}</p>
             <div>
                 {[new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()]
                     .map(choice =>
-                        <button key={choice.name} onClick={() => play(choice)} disabled={playerChoice !== ""}>{choice.name}</button>)}
+                        <button
+                            className={"choice-img choice-img--" + choice.name}
+                            key={choice.name}
+                            onClick={() => play(choice)}
+                            disabled={playerChoice !== ""}>
+                        </button>)}
             </div>
+            <div className='messageText'>Player Choice: {
+                playerChoice ? playerChoice.name : waiting("DIDN'T CHOSE YET")}</div>
             <div>
-                <p>Player Choice: {playerChoice ? playerChoice.name : "WAITING"}</p>
-                <p>Computer Choice: {computerChoice ? computerChoice.name : "WAITING"}</p>
-                { result ? <p>Actual Result: {result}</p> : null}
+                {[new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()]
+                    .map(choice =>
+                        <button
+                            className={"choice-img choice-img--" + choice.name}
+                            key={choice.name}
+                            disabled={true}>
+                        </button>)}
             </div>
+            <div className='messageText'>Computer Choice: {
+                computerChoice ? computerChoice.name : waiting("WAITING FOR PLAYER")}</div>
+            {result ? <p className='lineUp'>Result: {result}</p> : null}
             <Link to={'/'}>
                 <button className="button">Go to home</button>
             </Link>

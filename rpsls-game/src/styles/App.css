@@ -1,7 +1,6 @@
-/* CSV */
-/* FCEA40,E62D23,D5B57A,A07F69,3B2917 */
 .App {
   text-align: center;
+  overflow: auto;
   position:fixed;
   padding:0;
   margin:0;
@@ -11,10 +10,20 @@
 
   width: 100%;
   height: 100%;
-  background-image: url("../assets/images/tbbt-bg.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-color: #FCEA40;
+}
+
+p {
+  font-family: Impact;
+  margin-top: 1%;
+  font-size: 30px;
+  font-weight: 100;
+  background-image: linear-gradient(to left, #3B2917, #A07F69);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .button {
@@ -22,9 +31,6 @@
   margin-top: 1%;
   font-size: 150%;
   letter-spacing: 1px;
-}
-
-.button {
   align-items: center;
   background-image: radial-gradient(100% 100% at 100% 0, #A07F69 0, #E62D23 100%);
   border: 0;

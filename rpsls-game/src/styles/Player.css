@@ -1,0 +1,72 @@
+.choice-img {
+  height: 200px;
+  width: 200px;
+  padding: 20px;
+  margin: 4px 2px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.choice-img:disabled {
+  filter: gray; 
+  -webkit-filter: grayscale(100%);
+  cursor: not-allowed;
+}
+
+.choice-img--Paper {
+  background-image: url("../assets/images/paper.png");
+}
+
+.choice-img--Rock {
+  background-image: url("../assets/images/rock.png");
+}
+
+.choice-img--Scissors {
+  background-image: url("../assets/images/scissors.png");
+}
+
+.choice-img--Lizard {
+  background-image: url("../assets/images/lizard.png");
+}
+
+.choice-img--Spock {
+  background-image: url("../assets/images/spock.png");
+}
+
+.messageText {
+  font-family: Impact;
+  margin-top: 1%;
+  font-size: 30px;
+  font-weight: 100;
+  background-image: linear-gradient(to left, #3B2917, #A07F69);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.lineUp {
+  animation: 2s anim-lineUp ease-out infinite;
+  font-size: 50px;
+  font-weight: 100;
+}
+
+@keyframes anim-lineUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80%);
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
