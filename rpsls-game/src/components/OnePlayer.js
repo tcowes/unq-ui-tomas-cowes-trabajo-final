@@ -1,56 +1,6 @@
 import { React, useState } from 'react';
-import { Link } from "react-router-dom";
-
-class Choice {
-    canWin(otherPlayerChoice) {
-        return this.winsAgainst.includes(otherPlayerChoice.name);
-    }
-
-    equals(otherPlayerChoice) {
-        return this.name === otherPlayerChoice.name;
-    }
-
-}
-
-class Rock extends Choice {
-    constructor() {
-        super();
-        this.name = "Rock";
-        this.winsAgainst = ["Lizard", "Scissors"];
-    }
-}
-
-class Paper extends Choice {
-    constructor() {
-        super();
-        this.name = "Paper";
-        this.winsAgainst = ["Rock", "Spock"];
-    }
-}
-
-class Scissors extends Choice {
-    constructor() {
-        super();
-        this.name = "Scissors";
-        this.winsAgainst = ["Paper", "Lizard"];
-    }
-}
-
-class Lizard extends Choice {
-    constructor() {
-        super();
-        this.name = "Lizard";
-        this.winsAgainst = ["Spock", "Paper"];
-    }
-}
-
-class Spock extends Choice {
-    constructor() {
-        super();
-        this.name = "Spock";
-        this.winsAgainst = ["Scissors", "Rock"];
-    }
-}
+import { Link } from 'react-router-dom';
+import { Rock, Paper, Scissors, Lizard, Spock } from './Choice'
 
 const OnePlayer = () => {
     const [result, setResult] = useState("");
@@ -66,16 +16,12 @@ const OnePlayer = () => {
 
     function randomChoice() {
         const possibleChoices = [new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()];
-        const randomNumber = Math.floor(Math.random() * possibleChoices.length);
-        const randomChoiceComputer = possibleChoices[randomNumber];
+        const randomChoiceComputer = possibleChoices[Math.floor(Math.random() * possibleChoices.length)];
         setComputerChoice(randomChoiceComputer);
         return randomChoiceComputer;
     }
 
     function evaluateRound(playerChoice, computerChoice) {
-        console.log("ELIGIO EL JUGADOR", playerChoice);
-        console.log("ELIGIO LA PC", computerChoice);
-
         if (playerChoice?.canWin(computerChoice)) {
             setPlayerPoints(playerPoints + 1);
             setResult("You won!");
@@ -92,9 +38,10 @@ const OnePlayer = () => {
         setPlayerChoice(newPlayerChoice);
         await load(1500);
         evaluateRound(newPlayerChoice, randomChoice());
-        await load(3000);
+        await load(1500);
         setComputerChoice("");
         setPlayerChoice("");
+        setResult("");
     }
 
     return (
@@ -104,12 +51,12 @@ const OnePlayer = () => {
             <div>
                 {[new Rock(), new Paper(), new Scissors(), new Lizard(), new Spock()]
                     .map(choice =>
-                        <button key={choice.name} onClick={() => play(choice)}>{choice.name}</button>)}
+                        <button key={choice.name} onClick={() => play(choice)} disabled={playerChoice !== ""}>{choice.name}</button>)}
             </div>
             <div>
-                <p>Player Choice: {playerChoice ? playerChoice.name : "nada"}</p>
-                <p>Computer Choice: {computerChoice ? computerChoice.name : "nada"}</p>
-                <p>Actual Result: {result}</p>
+                <p>Player Choice: {playerChoice ? playerChoice.name : "WAITING"}</p>
+                <p>Computer Choice: {computerChoice ? computerChoice.name : "WAITING"}</p>
+                { result ? <p>Actual Result: {result}</p> : null}
             </div>
             <Link to={'/'}>
                 <button className="button">Go to home</button>
