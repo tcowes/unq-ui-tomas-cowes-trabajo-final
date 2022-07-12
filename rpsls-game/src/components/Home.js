@@ -8,7 +8,13 @@ const Home = () => {
 
             <div className="one-player">
                 <Link to={'/one-player'}>
-                    <button className="button">Play!</button>
+                    <button className="button">Player vs. Computer</button>
+                </Link>
+            </div>
+
+            <div className="multiplayer">
+                <Link to={'/multiplayer'}>
+                    <button className="button">Multiplayer!</button>
                 </Link>
             </div>
 
