@@ -3,7 +3,7 @@ import HomeView from './components/Home';
 import OnePlayerView from './components/OnePlayer';
 import MultiplayerView from './components/Multiplayer';
 import RulesView from './components/Rules';
-import './App.css';
+import './styles/App.css';
 
 function App() {
   return (

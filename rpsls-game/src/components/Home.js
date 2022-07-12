@@ -1,27 +1,24 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import '../styles/Home.css'
 
 const Home = () => {
+    const options = [
+        { className: 'one-player', text: 'Player vs. Computer' },
+        { className: 'multiplayer', text: 'Multiplayer!' },
+        { className: 'rules', text: 'Rules' },
+    ]
     return (
         <div>
-            <h2>Rock, Paper, Scissors, Lizard, Spock!</h2>
-
-            <div className="one-player">
-                <Link to={'/one-player'}>
-                    <button className="button">Player vs. Computer</button>
-                </Link>
-            </div>
-
-            <div className="multiplayer">
-                <Link to={'/multiplayer'}>
-                    <button className="button">Multiplayer!</button>
-                </Link>
-            </div>
-
-            <div className="rules">
-                <Link to={'/rules'}>
-                    <button className="button">Rules</button>
-                </Link>
+            <h2 className='title'>Rock, Paper, Scissors, Lizard, Spock!</h2>
+            <div>
+                {options.map(option =>
+                    <div className={option.className} key={option.className}>
+                        <Link to={'/' + option.className} className={option.className} key={option.className}>
+                            <button className='button'>{option.text}</button>
+                        </Link>
+                    </div>
+                )}
             </div>
         </div>
     )

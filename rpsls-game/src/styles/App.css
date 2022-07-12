@@ -1,0 +1,61 @@
+/* CSV */
+/* FCEA40,E62D23,D5B57A,A07F69,3B2917 */
+.App {
+  text-align: center;
+  position:fixed;
+  padding:0;
+  margin:0;
+
+  top:0;
+  left:0;
+
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/images/tbbt-bg.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #FCEA40;
+}
+
+.button {
+  font-family: Impact;
+  margin-top: 1%;
+  font-size: 150%;
+  letter-spacing: 1px;
+}
+
+.button {
+  align-items: center;
+  background-image: radial-gradient(100% 100% at 100% 0, #A07F69 0, #E62D23 100%);
+  border: 0;
+  border-radius: 6px;
+  box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #3B2917;
+  cursor: pointer;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: box-shadow .15s,transform .15s;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button:focus {
+  box-shadow: #3B2917 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3B2917 0 -3px 0 inset;
+}
+
+.button:hover {
+  box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3B2917 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: #3B2917 0 3px 7px inset;
+  transform: translateY(2px);
+}
